@@ -110,7 +110,7 @@ package
 							}
 						}
 					}
-					timeCount = new Timer(interval = interval - 100);
+					timeCount = new Timer(interval = interval - interval * 0.1);
 				}				
 			}
 		}
