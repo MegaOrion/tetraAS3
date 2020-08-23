@@ -13,30 +13,24 @@ package
 	 */
 	public class Game extends Sprite
 	{
-		public var snd: Sound = new TetroFall();
+		private var snd: Sound = new TetroFall();
 		public var tetromino: Sprite;
 		public var currentTetromino: uint;
 		public var currentRotation: uint;
-		public const TS: uint = 24;
-		
-		public var fieldArray: Array;
-		public var fieldSprite: Sprite;
-		
-		public var nextTetromino: uint = Math.floor(Math.random() * 7);
-		
+		private const TS: uint = 24;		
+		private var fieldArray: Array;
+		private var fieldSprite: Sprite;		
+		private var nextTetromino: uint = Math.floor(Math.random() * 7);		
 		public var tRow: int;
 		public var tCol: int;
 		public var interval: uint = 1001;		
-		public var timeCount: Timer = new Timer(interval);
-		
-		public var gameOver: Boolean = true;
-		
+		public var timeCount: Timer = new Timer(interval);		
+		public var gameOver: Boolean = true;		
 		public var fgr: Figures = new Figures();
-		public var landed: Sprite;
-		
-		public var score: TextField = new TextField();
-		public var scoreNum: TextField = new TextField();
-		public var scoreCount: uint = 0;
+		private var landed: Sprite;		
+		private var score: TextField = new TextField();
+		private var scoreNum: TextField = new TextField();
+		private var scoreCount: uint = 0;
 		
 		
 			
@@ -48,7 +42,7 @@ package
 			showScore();
 		}
 		
-		public function showScore(): void {
+		private function showScore(): void {
 			scoreNum.text = scoreCount.toString(10);
 			score.text = "LINES: ";
 			score.textColor = 0xFFFFFF;
@@ -81,7 +75,7 @@ package
 			}			
 		}		
 		
-		public function onTime(e: TimerEvent): void {
+		private function onTime(e: TimerEvent): void {
 			if (canFit(tRow + 1, tCol, currentRotation)) {
 				tRow++;
 				placeTetramino();
@@ -91,7 +85,7 @@ package
 			}
 		}
 		
-		public function checkForLines(): void {
+		private function checkForLines(): void {
 			for (var i: int = 0; i < 20; i++) {
 				if (fieldArray[i].indexOf(0) == -1){
 					scoreCount++;
@@ -172,7 +166,7 @@ package
 			tetromino.y = tRow * TS + 50;
 		}
 		
-		public function drawNext(): void {
+		private function drawNext(): void {
 			if (getChildByName("next") != null) {
 				removeChild(getChildByName("next"));
 			}

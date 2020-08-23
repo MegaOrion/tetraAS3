@@ -10,12 +10,12 @@ package
 	 */
 	public class Controller extends Game
 	{
-		public var _btnPlay: btnPlay = new btnPlay();	
-		public var _btnPause: btnPause = new btnPause();
-		public var _btnRotate: btnRotate = new btnRotate();	
-		public var _btnDown: btnDown = new btnDown();
-		public var _btnLeft: btnLeft = new btnLeft();	
-		public var _btnRight: btnRight = new btnRight();
+		private var _btnPlay: btnPlay = new btnPlay();	
+		private var _btnPause: btnPause = new btnPause();
+		private var _btnRotate: btnRotate = new btnRotate();	
+		private var _btnDown: btnDown = new btnDown();
+		private var _btnLeft: btnLeft = new btnLeft();	
+		private var _btnRight: btnRight = new btnRight();
 		
 		public function Controller() 
 		{
@@ -51,7 +51,7 @@ package
 			_btnRight.addEventListener(MouseEvent.CLICK, onBtnRight);
 		}
 		
-		public function onBtnRotate(e:MouseEvent): void {
+		private function onBtnRotate(e:MouseEvent): void {
 			var ct: uint = currentRotation;
 			var rot: uint = (ct + 1) % fgr.tetrominoes[currentTetromino].length;
 			if (canFit(tRow, tCol, rot)) {
@@ -62,24 +62,24 @@ package
 			} 
 		}
 		
-		public function onBtnDown(e:MouseEvent): void {			
+		private function onBtnDown(e:MouseEvent): void {
 			if (canFit(tRow + 1, tCol, currentRotation)) {
 				tRow++;
 				placeTetramino();
 			} else {
 				landTetramino();
 				generateTetramino();
-			} 			
+			}
 		}
 		
-		public function onBtnLeft(e:MouseEvent): void {
+		private function onBtnLeft(e:MouseEvent): void {
 			if (canFit(tRow, tCol - 1, currentRotation)) {
 				tCol--;
 				placeTetramino();
 			} 
 		}
 		
-		public function onBtnRight(e:MouseEvent): void {
+		private function onBtnRight(e:MouseEvent): void {
 			
 			if (canFit(tRow, tCol + 1, currentRotation)) {
 				tCol++;
@@ -87,7 +87,7 @@ package
 			}
 		}
 		
-		public function onBtnPause(e: MouseEvent): void {
+		private function onBtnPause(e: MouseEvent): void {
 			trace(parent.stage);
 			timeCount.stop();
 			parent.stage.removeEventListener(KeyboardEvent.KEY_DOWN, onKDown);
@@ -97,7 +97,7 @@ package
 			_btnRight.removeEventListener(MouseEvent.CLICK, onBtnRight);
 		}
 		
-		public function onBtnPlay(e: MouseEvent): void {
+		private function onBtnPlay(e: MouseEvent): void {
 			
 			if (!gameOver) {				
 				timeCount.start();
@@ -122,7 +122,7 @@ package
 			}			
 		}
 		
-		public function onKDown(e:KeyboardEvent): void {
+		private function onKDown(e:KeyboardEvent): void {
 			if (!gameOver) {
 				switch (e.keyCode) {
 					case 37:

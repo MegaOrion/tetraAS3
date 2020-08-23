@@ -4,6 +4,10 @@ package
 	import flash.display.Sprite;
 	import flash.display.MovieClip;
 	import Controller;
+	import flash.display.StageScaleMode;
+	import flash.display.Stage;
+	import flash.display.StageAlign;
+	import flash.events.Event;
 	
 	/**
 	 * ...
@@ -24,6 +28,8 @@ package
 			bg.y = 0;
 			addChild(bg);
 			addChild(ctrl);
-		}		
+			stage.scaleMode = StageScaleMode.NO_SCALE;
+			stage.align = StageAlign.TOP_LEFT;
+		}
 	}	
 }
