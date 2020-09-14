@@ -33,11 +33,12 @@ package
 		}
 	}	
 }
-import flash.display.Bitmap;
+	import flash.display.Bitmap;
 	import flash.display.Sprite;
 	import flash.display.Stage;
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
+	import flash.events.MouseEvent;
 	import flash.events.KeyboardEvent;
 	import flash.events.TimerEvent;
 	import flash.media.Sound;
@@ -46,7 +47,7 @@ import flash.display.Bitmap;
 	
 	
 	
-	[SWF(width="800", height="600", frameRate="31", backgroundColor="#FFFFFF")]
+	[SWF(width="1092", height="600", frameRate="31", backgroundColor="#FFFFFF")]
 	public class Boa extends Sprite
 	{
 		[Embed(source = "../assets/carbon.jpg")]private var BackGround: Class;
@@ -68,6 +69,10 @@ import flash.display.Bitmap;
 		private var score: TextField = new TextField();
 		private var scoreStr: TextField = new TextField();
 		private var scoreCount: uint = 0;
+		private var left: Sprite;
+		private var up: Sprite;
+		private var right: Sprite;
+		private var down: Sprite;
 		
 		public function Boa()
 		{			
@@ -78,8 +83,85 @@ import flash.display.Bitmap;
 			generateSnake();
 			generateApple();
 			showScore();
+			addButtons();
+			left.addEventListener(MouseEvent.CLICK, onBtnLeft);
+			up.addEventListener(MouseEvent.CLICK, onBtnUp);
+			right.addEventListener(MouseEvent.CLICK, onBtnRight);
+			down.addEventListener(MouseEvent.CLICK, onBtnDOwn);
+			
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
 			timeCount.addEventListener(TimerEvent.TIMER, onTime);
+		}
+		
+		public function onBtnLeft(e: MouseEvent): void {
+			if (!moving) {
+				timeCount.start();				
+				moveSnake();
+			}
+			moving = true;
+			if (direction != "right") {						
+				direction = "left";
+			}
+		}
+		
+		public function onBtnUp(e: MouseEvent): void {
+			if (!moving) {
+				timeCount.start();				
+				moveSnake();
+			}
+			moving = true;
+			if (direction != "down") {						
+				direction = "up";
+			}
+		}
+		
+		public function onBtnRight(e: MouseEvent): void {
+			if (!moving) {
+				timeCount.start();				
+				moveSnake();
+			}
+			moving = true;
+			if (direction != "left") {					
+				direction = "right";
+			}
+		}
+		
+		public function onBtnDOwn(e: MouseEvent): void {
+			if (!moving) {
+				timeCount.start();				
+				moveSnake();
+			}
+			moving = true;
+			if (direction != "up") {
+				direction = "down";
+			}
+		}
+		
+		public function addButtons(): void {
+			left = new Sprite();
+			up = new Sprite();
+			right = new Sprite();
+			down = new Sprite();
+			addChild(left);
+			left.graphics.lineStyle(1, 0x000000);
+			left.graphics.beginFill(0x888888);
+			left.graphics.drawCircle(275, 300, 15);
+			left.graphics.endFill();
+			addChild(up);
+			up.graphics.lineStyle(1, 0x000000);
+			up.graphics.beginFill(0x888888);
+			up.graphics.drawCircle(300, 275, 15);
+			up.graphics.endFill();
+			addChild(right);
+			right.graphics.lineStyle(1, 0x000000);
+			right.graphics.beginFill(0x888888);
+			right.graphics.drawCircle(325, 300, 15);
+			right.graphics.endFill();
+			addChild(down);
+			down.graphics.lineStyle(1, 0x000000);
+			down.graphics.beginFill(0x888888);
+			down.graphics.drawCircle(300, 325, 15);
+			down.graphics.endFill();			
 		}
 		
 		public function showScore(): void {
